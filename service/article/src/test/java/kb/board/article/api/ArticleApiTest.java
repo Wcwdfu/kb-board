@@ -1,6 +1,7 @@
 package kb.board.article.api;
 
 import kb.board.article.service.request.ArticleCreateRequest;
+import kb.board.article.service.response.ArticlePageResponse;
 import kb.board.article.service.response.ArticleResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -60,6 +61,19 @@ public class ArticleApiTest {
                 .uri("/v1/articles/{articleId}", 176357604956528640L)
                 .retrieve()
                 .body(Void.class);
+    }
+
+    @Test
+    void readAllTest(){
+        ArticlePageResponse response = client.get()
+                .uri("/v1/articles?boardId=1&pageSize=30&page=50000")
+                .retrieve()
+                .body(ArticlePageResponse.class);
+
+        System.out.println("response.getArticleCount() = " + response.getArticleCount());
+        for (ArticleResponse article : response.getArticles()) {
+            System.out.println("articleId = " + article.getArticleId());
+        }
     }
 
     @Getter
