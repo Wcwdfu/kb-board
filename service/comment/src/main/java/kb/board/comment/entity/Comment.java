@@ -30,6 +30,7 @@ public class Comment {
         comment.commentId = commentId;
         comment.content = content;
         comment.parentCommentId = parentCommentId == null? commentId : parentCommentId;
+        comment.articleId = articleId;
         comment.writerId = writerId;
         comment.deleted = false;
         comment.createdAt = LocalDateTime.now();
