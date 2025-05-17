@@ -2,9 +2,12 @@ package kb.board.comment.controller;
 
 import kb.board.comment.service.CommentServiceV2;
 import kb.board.comment.service.request.CommentCreateRequestV2;
+import kb.board.comment.service.response.CommentPageResponse;
 import kb.board.comment.service.response.CommentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,22 +29,28 @@ public class CommentControllerV2 {
         commentService.delete(commentId);
     }
 
-//    @GetMapping("/v2/comments")
-//    public CommentPageResponse readAll(
-//            @RequestParam("articleId") Long articleId,
-//            @RequestParam("page") Long page,
-//            @RequestParam("pageSize") Long pageSize
+    @GetMapping("/v2/comments")
+    public CommentPageResponse readAll(
+            @RequestParam("articleId") Long articleId,
+            @RequestParam("page") Long page,
+            @RequestParam("pageSize") Long pageSize
+    ) {
+        return commentService.readAll(articleId, page, pageSize);
+    }
+
+    @GetMapping("/v2/comments/infinite-scroll")
+    public List<CommentResponse> readAllInfiniteScroll(
+            @RequestParam("articleId") Long articleId,
+            @RequestParam(value = "lastPath", required = false) String lastPath,
+            @RequestParam("pageSize") Long pageSize
+    ) {
+        return commentService.readAllInfiniteScroll(articleId, lastPath, pageSize);
+    }
+
+//    @GetMapping("/v2/comments/articles/{articleId}/count")
+//    public Long count(
+//            @PathVariable("articleId") Long articleId
 //    ) {
-//        return commentService.readAll(articleId, page, pageSize);
-//    }
-//
-//    @GetMapping("/v2/comments/infinite-scroll")
-//    public List<CommentResponse> readAll(
-//            @RequestParam("articleId") Long articleId,
-//            @RequestParam(value = "lastParentCommentId", required = false) Long lastParentCommentId,
-//            @RequestParam(value = "lastCommentId", required = false) Long lastCommentId,
-//            @RequestParam("pageSize") Long pageSize
-//    ) {
-//        return commentService.readAll(articleId, lastParentCommentId, lastCommentId, pageSize);
+//        return commentService.count(articleId);
 //    }
 }
