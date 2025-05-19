@@ -17,7 +17,7 @@ public class ArticleApiTest {
     @Test
     void createTest(){
         ArticleResponse response = create(new ArticleCreateRequest(
-                "hi", "my content", 1L, 1L
+                "hi", "my content", 1L, 2L
         ));
         System.out.println("response = " + response);
     }
@@ -32,7 +32,7 @@ public class ArticleApiTest {
 
     @Test
     void readTest(){
-        ArticleResponse response = read(176357604956528640L);
+        ArticleResponse response = read(182841144407867392L);
         System.out.println("response = " + response);
     }
 
@@ -61,7 +61,7 @@ public class ArticleApiTest {
     @Test
     void deleteTest(){
         client.delete()
-                .uri("/v1/articles/{articleId}", 176357604956528640L)
+                .uri("/v1/articles/{articleId}", 182841144407867392L)
                 .retrieve()
                 .body(Void.class);
     }
@@ -104,6 +104,28 @@ public class ArticleApiTest {
         for (ArticleResponse articleResponse : articles2) {
             System.out.println("articleResponse.getArticleId() = " +articleResponse.getArticleId());
         }
+    }
+
+    @Test
+    void countTest() {
+        ArticleResponse response = create(new ArticleCreateRequest("hi", "content", 1L, 2L));
+
+        Long count1 = client.get()
+                .uri("/v1/articles/boards/{boardId}/count", 2L)
+                .retrieve()
+                .body(Long.class);
+        System.out.println("count1 = " + count1); // 1
+
+        client.delete()
+                .uri("/v1/articles/{articleId}", response.getArticleId())
+                .retrieve()
+                .body(Void.class);
+
+        Long count2 = client.get()
+                .uri("/v1/articles/boards/{boardId}/count", 2L)
+                .retrieve()
+                .body(Long.class);
+        System.out.println("count2 = " + count2); // 0
     }
 
     @Getter
