@@ -5,7 +5,7 @@ import kb.board.like.entity.ArticleLikeCount;
 import kb.board.like.repository.ArticleLikeCountRepository;
 import kb.board.like.repository.ArticleLikeRepository;
 import kb.board.like.service.response.ArticleLikeResponse;
-import kuke.board.common.snowflake.Snowflake;
+import kb.board.common.snowflake.Snowflake;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

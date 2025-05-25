@@ -2,10 +2,9 @@ package kb.board.comment.data;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import kb.board.comment.entity.Comment;
 import kb.board.comment.entity.CommentPath;
 import kb.board.comment.entity.CommentV2;
-import kuke.board.common.snowflake.Snowflake;
+import kb.board.common.snowflake.Snowflake;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

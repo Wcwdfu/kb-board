@@ -1,7 +1,6 @@
 package kb.board.comment.service;
 
 import kb.board.comment.entity.ArticleCommentCount;
-import kb.board.comment.entity.Comment;
 import kb.board.comment.entity.CommentPath;
 import kb.board.comment.entity.CommentV2;
 import kb.board.comment.repository.ArticleCommentCountRepository;
@@ -9,7 +8,7 @@ import kb.board.comment.repository.CommentRepositoryV2;
 import kb.board.comment.service.request.CommentCreateRequestV2;
 import kb.board.comment.service.response.CommentPageResponse;
 import kb.board.comment.service.response.CommentResponse;
-import kuke.board.common.snowflake.Snowflake;
+import kb.board.common.snowflake.Snowflake;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

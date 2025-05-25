@@ -9,7 +9,7 @@ import kb.board.article.service.request.ArticleCreateRequest;
 import kb.board.article.service.request.ArticleUpdateRequest;
 import kb.board.article.service.response.ArticlePageResponse;
 import kb.board.article.service.response.ArticleResponse;
-import kuke.board.common.snowflake.Snowflake;
+import kb.board.common.snowflake.Snowflake;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
