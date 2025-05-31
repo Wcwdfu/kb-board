@@ -1,0 +1,10 @@
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    //애플리케이션마다 샤드를 균등하게 할당해서 아직 전송되지 않은 이벤트들을 재처리한다고 했는데 그러기 위해서 코디네이터를 만들어야 함.
+    implementation 'org.springframework.kafka:spring-kafka'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation project(':common:snowflake')
+    implementation project(':common:event')
+    implementation project(':common:data-serializer')
+}
