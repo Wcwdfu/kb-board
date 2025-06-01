@@ -58,6 +58,6 @@ public class MessageRelayCoordinator {
     }
 
     private String generateKey(){
-        return "message-relay-coordinator::app=list::%s".formatted(applicationName);
+        return "message-relay-coordinator::app-list::%s".formatted(applicationName);
     }
 }

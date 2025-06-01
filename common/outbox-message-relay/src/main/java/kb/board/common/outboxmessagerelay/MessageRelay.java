@@ -53,7 +53,7 @@ public class MessageRelay {
             timeUnit = TimeUnit.SECONDS,
             scheduler = "messageRelayPublishPendingEventExecutor"
     )
-    public void publisPendingEvent(){
+    public void publishPendingEvent(){
         AssignedShard assignedShard = messageRelayCoordinator.assignShards();
         log.info("[MessageRelay.publisPendingEvent] assignedShard size={}", assignedShard.getShards().size());
         for (Long shard : assignedShard.getShards()) {
