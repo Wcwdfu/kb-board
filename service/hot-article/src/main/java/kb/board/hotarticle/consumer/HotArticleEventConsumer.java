@@ -23,7 +23,7 @@ public class HotArticleEventConsumer {
             EventType.Topic.KB_BOARD_VIEW
     })
     public void listen(String msg, Acknowledgment ack) {
-        log.info("[HotArticleEventConsumer.listen] msg: {}", msg);
+        log.info("[HotArticleEventConsumer.listen] received msg: {}", msg);
         Event<EventPayload> event = Event.fromJson(msg);
         if (event != null) {
             hotArticleService.handleEvent(event);

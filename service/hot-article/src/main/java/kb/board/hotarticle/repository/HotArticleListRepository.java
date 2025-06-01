@@ -28,7 +28,7 @@ public class HotArticleListRepository {
             StringRedisConnection conn = (StringRedisConnection) action;
             String key = generateKey(time);
             conn.zAdd(key, score, String.valueOf(articleId));
-            conn.zRemRange(key, 0, -1 - limit);
+            conn.zRemRange(key, 0, - limit - 1);
             conn.expire(key, ttl.toSeconds());
             return null;
 

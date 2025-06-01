@@ -6,12 +6,14 @@ import kb.board.hotarticle.repository.ArticleCreatedTimeRepository;
 import kb.board.hotarticle.repository.HotArticleListRepository;
 import kb.board.hotarticle.service.eventHandler.EventHandler;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.time.Duration;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class HotArticleScoreUpdater  {
@@ -43,6 +45,7 @@ public class HotArticleScoreUpdater  {
     }
 
     private boolean isArticleCreatedToday(LocalDateTime createdTime) {
-        return createdTime != null && createdTime.toLocalDate().equals(LocalDateTime.now());
+        log.info("✅ createdTime = {}, now = {}", createdTime, LocalDateTime.now());
+        return createdTime != null && createdTime.toLocalDate().equals(LocalDate.now());
     }
 }
