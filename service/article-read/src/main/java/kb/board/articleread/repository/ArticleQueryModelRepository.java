@@ -49,4 +49,11 @@ public class ArticleQueryModelRepository {
         return KEY_FORMAT.formatted(articleId);
     }
 
+    public Map<Long, ArticleQueryModel> readAll(List<Long> articleIds) {
+        List<String> keyList = articleIds.stream().map(this::generateKey).toList();
+        return redisTemplate.opsForValue().multiGet(keyList).stream()
+                .filter(Objects::nonNull)
+                .map(json -> DataSerializer.deserialize(json, ArticleQueryModel.class))
+                .collect(toMap(ArticleQueryModel::getArticleId, identity()));
+    }
 }
