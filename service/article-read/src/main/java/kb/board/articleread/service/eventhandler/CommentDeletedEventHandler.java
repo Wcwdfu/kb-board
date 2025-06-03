@@ -1,19 +1,19 @@
-package kb.board.articleread.service.event.handler;
+package kb.board.articleread.service.eventhandler;
 
 import kb.board.articleread.repository.ArticleQueryModelRepository;
 import kb.board.common.event.Event;
 import kb.board.common.event.EventType;
-import kb.board.common.event.payload.ArticleUnlikedEventPayload;
+import kb.board.common.event.payload.CommentDeletedEventPayload;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ArticleUnlikedEventHandler implements EventHandler<ArticleUnlikedEventPayload> {
+public class CommentDeletedEventHandler implements EventHandler<CommentDeletedEventPayload> {
     private final ArticleQueryModelRepository articleQueryModelRepository;
 
     @Override
-    public void handle(Event<ArticleUnlikedEventPayload> event) {
+    public void handle(Event<CommentDeletedEventPayload> event) {
         articleQueryModelRepository.read(event.getPayload().getArticleId())
                 .ifPresent(articleQueryModel -> {
                     articleQueryModel.updateBy(event.getPayload());
@@ -22,7 +22,7 @@ public class ArticleUnlikedEventHandler implements EventHandler<ArticleUnlikedEv
     }
 
     @Override
-    public boolean supports(Event<ArticleUnlikedEventPayload> event) {
-        return EventType.ARTICLE_UNLIKED == event.getType();
+    public boolean supports(Event<CommentDeletedEventPayload> event) {
+        return EventType.COMMENT_DELETED == event.getType();
     }
 }

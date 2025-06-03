@@ -55,7 +55,7 @@ public class MessageRelay {
     )
     public void publishPendingEvent(){
         AssignedShard assignedShard = messageRelayCoordinator.assignShards();
-        log.info("[MessageRelay.publisPendingEvent] assignedShard size={}", assignedShard.getShards().size());
+        log.info("[MessageRelay.publishPendingEvent] assignedShard size={}", assignedShard.getShards().size());
         for (Long shard : assignedShard.getShards()) {
             List<Outbox> outboxes = outboxRepository.findAllByShardKeyAndCreatedAtLessThanEqualOrderByCreatedAtAsc(
                     shard,

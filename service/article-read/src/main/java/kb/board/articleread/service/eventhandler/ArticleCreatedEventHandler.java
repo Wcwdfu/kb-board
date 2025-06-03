@@ -1,4 +1,4 @@
-package kb.board.articleread.service.event.handler;
+package kb.board.articleread.service.eventhandler;
 
 import kb.board.articleread.repository.ArticleQueryModel;
 import kb.board.articleread.repository.ArticleQueryModelRepository;

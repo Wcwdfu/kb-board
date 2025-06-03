@@ -6,7 +6,7 @@ import kb.board.articleread.client.LikeClient;
 import kb.board.articleread.client.ViewClient;
 import kb.board.articleread.repository.ArticleQueryModel;
 import kb.board.articleread.repository.ArticleQueryModelRepository;
-import kb.board.articleread.service.event.handler.EventHandler;
+import kb.board.articleread.service.eventhandler.EventHandler;
 import kb.board.articleread.service.response.ArticleReadResponse;
 import kb.board.common.event.Event;
 import kb.board.common.event.EventPayload;

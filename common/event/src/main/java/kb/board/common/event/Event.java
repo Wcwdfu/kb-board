@@ -39,5 +39,4 @@ public class Event <T extends EventPayload> {
         private String type;
         private Object payload;
     }
-
 }
