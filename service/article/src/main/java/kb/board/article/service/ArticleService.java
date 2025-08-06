@@ -35,11 +35,13 @@ public class ArticleService {
                 Article.create(snowflake.nextId(), request.getTitle(), request.getContent(), request.getBoardId(), request.getWriterId())
         );
         int result = boardArticleCountRepository.increase(request.getBoardId());
+
         if(result == 0) {
             boardArticleCountRepository.save(
                     BoardArticleCount.init(request.getBoardId(), 1L)
             );
         }
+
         outboxEventPublisher.publish(
                 EventType.ARTICLE_CREATED,
                 ArticleCreatedEventPayload.builder()

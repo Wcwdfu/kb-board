@@ -41,10 +41,10 @@ public class MessageRelay {
                     String.valueOf(outbox.getShardKey()),
                     outbox.getPayload()
             ).get(1, TimeUnit.SECONDS);
+            outboxRepository.delete(outbox);
         } catch (Exception e){
             log.error("[MessageRelay.publishEvent] outbox={}", outbox, e);
         }
-        outboxRepository.delete(outbox);
     }
 
     @Scheduled(
@@ -56,6 +56,7 @@ public class MessageRelay {
     public void publishPendingEvent(){
         AssignedShard assignedShard = messageRelayCoordinator.assignShards();
         log.info("[MessageRelay.publishPendingEvent] assignedShard size={}", assignedShard.getShards().size());
+
         for (Long shard : assignedShard.getShards()) {
             List<Outbox> outboxes = outboxRepository.findAllByShardKeyAndCreatedAtLessThanEqualOrderByCreatedAtAsc(
                     shard,
@@ -66,5 +67,6 @@ public class MessageRelay {
                 publishEvent(outbox);
             }
         }
+
     }
 }

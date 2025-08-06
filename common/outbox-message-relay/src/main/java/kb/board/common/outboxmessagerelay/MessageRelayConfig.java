@@ -11,6 +11,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +48,10 @@ public class MessageRelayConfig {
 
     //이벤트 전송이 안된것들 10초 이후 주기적으로 보내줄거니까
     @Bean
-    public Executor messageRelayPublishPendingEventExecutor(){
-        return Executors.newSingleThreadScheduledExecutor();
+    public ThreadPoolTaskScheduler messageRelayPublishPendingEventExecutor(){
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.setPoolSize(1);
+        scheduler.setThreadNamePrefix("mr-pending-");
+        return scheduler;
     }
 }
